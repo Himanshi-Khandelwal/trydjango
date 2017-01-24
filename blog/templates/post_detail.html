@@ -1,0 +1,27 @@
+{% extends "index.html" %}
+
+
+{% block content %}
+<div class='col-sm-6 col-sm-offset-3'>
+<img src='{{instance.img.url}}' class='img-responsive' />
+<h1>{{ title }}
+<small>{% if instance.draft %}<span style="color:red;">Draft</span>{% endif %}{{ instance.timestamp}} </small></h1>
+
+
+{{ instance.content|linebreaks }}<br/>
+<br/>
+
+<div class="fb-like" data-href="{{ baseurl }}" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+<div class="row">
+<div class='col-sm-12'>
+
+
+<a href="https://www.facebook.com/sharer/sharer.php?u={{ baseurl }}">
+Facebook
+</a>
+<hr>
+<div class="fb-comments" data-href="{{ baseurl }}" data-numposts="5"></div>
+</div>
+</div>
+</div>
+{% endblock %}

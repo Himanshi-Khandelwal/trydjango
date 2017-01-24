@@ -1,0 +1,37 @@
+<html>
+<head>
+	<title>
+			Microblog
+	</title>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+</head>
+<body >
+	<div class="container">
+<h1 style ="color: 	#000000;">&nbsp &nbsp 	Welcome to Microblog </h1>
+<hr>
+  {%block content %}
+
+<h1 style="text-align:center;top-margin:60px;padding-top:150px;"><b>Register Yourself to Explore Us!</b></h1>
+  <p style="font-size:25px; text-align:center;padding-top:10px;">Please <a style ="color:   	#DC143C;text-decoration:none;" href="register/">Register </a></p> <p style="font-size:25px; text-align:center;">or</p>
+
+		<p style="font-size:25px; text-align:center;padding-top:10px;"><a style ="color: 	#DC143C;text-decoration:none;" href="login/">Login</a></p>
+		{% endblock %}
+</div>
+<a href="/create">Create</a>
+<a href="/post_list" >Show all Post</a>
+
+
+
+</body>
+<footer >
+      <p>@Copyright info
+
+    </footer>
+
+</html>

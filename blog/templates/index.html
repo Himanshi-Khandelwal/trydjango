@@ -1,0 +1,80 @@
+<!--DOCTYPE html -->
+{% load static %}
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<link rel='stylesheet' href="{% static "css/base.css" %}"/>
+</head>
+
+<body>
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1187213901313855";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+
+<div class= 'container'>
+{% block content %}
+
+
+
+<div class='col-sm-6 col-sm-offset-2'>
+<h1>{{ title }} </h1>
+
+<form method="GET" action="">
+  <input type='text' name='q' placeholder='Search Posts'/>
+  <input type='submit' value="Search"/>
+
+{% for obj in object_list %}
+<div class="row">
+
+
+  <div class="col-sm-12 ">
+    <div class="thumbnail">
+
+      <div class="caption">
+        <h3><a href= '/blog/{{obj.id}}/' >{{obj.title}}</a><small> {{ obj.timestamp|timesince}} ago <a href="/blog/{{obj.id}}/edit" class="yo" style="color:blue;">Edit</a> <a href="/blog/{{obj.id}}/delete" class="yo" style="color:black;">Delete</a> </small> </h3>
+        <p>{{ obj.content |linebreaks|truncatechars:30}}</p>
+        <p><a href='/blog/{{obj.id}}/'  class="btn btn-primary" role="button">View</a> </p>
+      </div>
+    </div>
+  </div>
+
+<hr/>
+
+</div>
+{% endfor %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if object_list.has_previous %}
+            <a href="?page={{ object_list.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+        </span>
+
+        {% if object_list.has_next %}
+            <a href="?page={{ object_list.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+
+
+</div>
+{% endblock content %}
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
