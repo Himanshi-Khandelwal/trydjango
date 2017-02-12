@@ -2,18 +2,20 @@
 
 
 {% block content %}
-<div class='col-sm-6 col-sm-offset-3'>
+<div class='col-sm-6 col-sm-offset-3 '>
 <img src='{{instance.img.url}}' class='img-responsive' />
 <h1>{{ title }}
 <small>{% if instance.draft %}<span style="color:red;">Draft</span>{% endif %}{{ instance.timestamp}} </small></h1>
 
+<div class='content-markdown'>
 
-{{ instance.content|linebreaks }}<br/>
+{{ instance.content }}<br/>
+
 <br/>
-
+</div>
 <div class="fb-like" data-href="{{ baseurl }}" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
 <div class="row">
-<div class='col-sm-12'>
+<div class='col-sm-12 '>
 
 
 <a href="https://www.facebook.com/sharer/sharer.php?u={{ baseurl }}">

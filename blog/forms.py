@@ -1,11 +1,14 @@
 from django import forms
 from django.contrib.auth import (authenticate,get_user_model,login,logout,)
+from pagedown.widgets import PagedownWidget
 
 from .models import Post
 
 User=get_user_model()
 
 class PostForm(forms.ModelForm):
+    content=forms.CharField(widget=PagedownWidget)
+    publish=forms.DateField(widget=forms.SelectDateWidget)
     class Meta:
         model = Post
         fields = [

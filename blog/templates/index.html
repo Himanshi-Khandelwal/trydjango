@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
 <link rel='stylesheet' href="{% static "css/base.css" %}"/>
+<link rel='stylesheet' href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" >
+{% block head_extra %} {% endblock head_extra %}
 </head>
 
 <body>
@@ -29,19 +31,25 @@
 <h1>{{ title }} </h1>
 
 <form method="GET" action="">
-  <input type='text' name='q' placeholder='Search Posts'/>
-  <input type='submit' value="Search"/>
+  <div class='input-group'>
+    <input class='form-control' type='text' name='q' placeholder='Search Posts'/>
+    <span class='input-group-btn'>
 
+    <button class='btn btn-default' type='submit'>Search <i class="fa fa-search"></i></button>
+  </span>
+  </div>
 {% for obj in object_list %}
 <div class="row">
 
 
   <div class="col-sm-12 ">
     <div class="thumbnail">
-
+      {% if obj.image %}
+        <img src='{{ obj.image.url }}' class='img-responsive' />
+      {% endif %}
       <div class="caption">
         <h3><a href= '/blog/{{obj.id}}/' >{{obj.title}}</a><small> {{ obj.timestamp|timesince}} ago <a href="/blog/{{obj.id}}/edit" class="yo" style="color:blue;">Edit</a> <a href="/blog/{{obj.id}}/delete" class="yo" style="color:black;">Delete</a> </small> </h3>
-        <p>{{ obj.content |linebreaks|truncatechars:30}}</p>
+        <p class='content-markdown '>{{ obj.content |truncatechars:30}}</p>
         <p><a href='/blog/{{obj.id}}/'  class="btn btn-primary" role="button">View</a> </p>
       </div>
     </div>
@@ -72,9 +80,30 @@
 </div>
 {% endblock content %}
 
+<script
+			  src="http://code.jquery.com/jquery-1.12.4.min.js"
+			  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+			  crossorigin="anonymous"></script>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+<script src='https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.min.js'></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".content-markdown").each (function(){
+      var content= $(this).text()
+      console.log(content)
+      var markedContent=marked(content)
+      console.log(markedContent)
+      $(this).html(markedContent)
+  })
+  $(".content-markdown img").each (function(){
+      $(this).addClass("img-responsive")
+  })
+
+})
+</script>
 </body>
 
 </html>
