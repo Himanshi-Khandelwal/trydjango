@@ -22,6 +22,22 @@
 Facebook
 </a>
 <hr>
+<div>
+  <p class='lead'> Comments</p>
+  <form method="POST" action=""> {% csrf_token %}
+    {{ comment_form }}
+    <input type='submit' value='Post comment' class='btn btn-default' />
+  </form>
+  <hr>
+  {% for comment in comments  %}
+      <div>
+        {{ comment.content }}
+        <br>
+        <small>via{{comment.user}} |{{comment.timestamp|timesince}}ago</small>
+        <hr>
+      </div>
+      {% endfor %}
+</div>
 <div class="fb-comments" data-href="{{ baseurl }}" data-numposts="5"></div>
 </div>
 </div>
